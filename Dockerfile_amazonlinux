@@ -1,0 +1,10 @@
+FROM amazonlinux
+ENV TZ Asia/Tokyo
+
+RUN yum update -y && \
+    yum -y install systemd iputils net-tools procps sudo vim tar less which
+
+RUN yum install -y amazon-linux-extras yum-utils && \
+    yum-config-manager --enable extras
+
+CMD ["/sbin/init"]

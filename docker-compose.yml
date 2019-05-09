@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile_amazonlinux
+    volumes:
+      - ./scripts:/var/scripts
+    ports:
+      - 10080:80
+    privileged: true
+    links:
+      - fluentd
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile_amazonlinux
+    volumes:
+      - ./scripts:/var/scripts
+    ports:
+      - 10081:80
+    privileged: true
+    links:
+      - fluentd
+  fluentd:
+    build:
+      context: .
+      dockerfile: Dockerfile_amazonlinux
+    volumes:
+      - ./scripts:/var/scripts
+    expose:
+      - 24224
+    privileged: true
